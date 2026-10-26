@@ -1,0 +1,699 @@
+/* ===== ПЕРЕМЕННЫЕ: основные цвета и шрифты сайта. Поменяй тут — изменится везде ===== */
+:root {
+  --color-main: #6f4e37;     /* кофейный */
+  --color-accent: #d4a373;   /* карамельный */
+  --color-bg: #fffaf3;       /* светлый фон */
+  --color-bg-alt: #f3e9dc;   /* фон для чередующихся блоков */
+  --color-dark: #1f1610;     /* тёмный фон */
+  --color-text: #2b2118;     /* цвет текста */
+  --color-muted: #7a6858;    /* приглушённый текст */
+  --font-title: "Playfair Display", Georgia, serif;
+  --font-text: "Inter", "Segoe UI", Arial, sans-serif;
+  --radius: 20px;
+}
+
+/* Сброс стандартных отступов браузера */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth; /* плавная прокрутка по ссылкам меню */
+}
+
+body {
+  font-family: var(--font-text);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.7;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Контейнер ограничивает ширину контента и центрирует его */
+.container {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-title);
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 2.8rem); /* размер подстраивается под ширину экрана */
+  margin-bottom: 20px;
+}
+
+/* ===== КНОПКИ ===== */
+.button {
+  display: inline-block;
+  padding: 14px 32px;
+  background: var(--color-accent);
+  color: var(--color-dark);
+  border: 2px solid var(--color-accent);
+  border-radius: 40px;
+  font-family: var(--font-text);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s, color 0.3s;
+}
+
+.button:hover {
+  transform: translateY(-3px); /* кнопка чуть приподнимается */
+  box-shadow: 0 10px 25px rgba(212, 163, 115, 0.45);
+}
+
+.button--outline {
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+
+.button--outline:hover {
+  background: #fff;
+  color: var(--color-dark);
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.25);
+}
+
+/* ===== ШАПКА ===== */
+.header {
+  position: fixed; /* шапка всегда наверху */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 24px 0;
+  transition: background 0.4s, padding 0.4s, box-shadow 0.4s;
+}
+
+/* Класс scrolled добавляет скрипт, когда страницу прокрутили вниз */
+.header.scrolled {
+  background: rgba(31, 22, 16, 0.92);
+  backdrop-filter: blur(10px); /* размытие того, что под шапкой */
+  padding: 12px 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: var(--font-title);
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.logo span {
+  color: var(--color-accent);
+}
+
+.nav a {
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+  margin-left: 32px;
+  font-weight: 500;
+}
+
+/* Линия под ссылкой, которая «вырастает» при наведении */
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent);
+  transition: width 0.3s;
+}
+
+.nav a:hover::after {
+  width: 100%;
+}
+
+/* Бургер из трёх полосок */
+.burger {
+  display: none; /* на компьютере бургер скрыт */
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.burger span {
+  width: 26px;
+  height: 2px;
+  background: #fff;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Когда меню открыто, полоски превращаются в крестик */
+.burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ===== ГЛАВНЫЙ ЭКРАН ===== */
+.hero {
+  position: relative;
+  min-height: 100vh; /* на всю высоту экрана */
+  padding: 120px 0 100px; /* место под шапку сверху и под стрелку снизу */
+  display: flex;
+  align-items: center;
+  color: #fff;
+  background: url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1800&q=80") center / cover;
+  overflow: hidden;
+}
+
+/* Затемнение поверх фото, чтобы текст хорошо читался */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(20, 13, 8, 0.85) 0%, rgba(20, 13, 8, 0.4) 100%);
+}
+
+.hero__content {
+  position: relative; /* чтобы текст был поверх затемнения */
+  width: 100%;
+}
+
+/* Каждый элемент главного экрана появляется по очереди (animation-delay) */
+.hero__content > * {
+  opacity: 0;
+  animation: fadeUp 0.9s ease forwards;
+}
+.hero__content > *:nth-child(1) { animation-delay: 0.2s; }
+.hero__content > *:nth-child(2) { animation-delay: 0.4s; }
+.hero__content > *:nth-child(3) { animation-delay: 0.6s; }
+.hero__content > *:nth-child(4) { animation-delay: 0.8s; }
+
+.hero__subtitle {
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  margin-bottom: 20px;
+}
+
+.hero__text {
+  font-size: 1.15rem;
+  max-width: 520px;
+  opacity: 0.9;
+  margin-bottom: 36px;
+}
+
+.hero__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Подпрыгивающая стрелка */
+.hero__scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  color: #fff;
+  font-size: 1.5rem;
+  text-decoration: none;
+  animation: bounce 2s infinite;
+}
+
+/* ===== АНИМАЦИИ (keyframes — «кадры» анимации) ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50%      { transform: translate(-50%, 10px); }
+}
+
+/* ===== ПОЯВЛЕНИЕ ПРИ ПРОКРУТКЕ ===== */
+/* Сначала элемент прозрачный и сдвинут вниз... */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* ...а когда скрипт добавит класс visible — он плавно «всплывает» */
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== СЕКЦИИ ===== */
+.section {
+  padding: 110px 0;
+}
+
+.section--alt {
+  background: var(--color-bg-alt);
+}
+
+.section--dark {
+  background: var(--color-dark);
+  color: #fff;
+}
+
+.section__head {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.section__label {
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* ===== ФИЛЬТРЫ МЕНЮ ===== */
+.filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 48px;
+}
+
+.filter {
+  padding: 10px 26px;
+  border: 2px solid var(--color-main);
+  border-radius: 40px;
+  background: transparent;
+  color: var(--color-main);
+  font-family: var(--font-text);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.filter:hover,
+.filter.active {
+  background: var(--color-main);
+  color: #fff;
+}
+
+/* ===== КАРТОЧКИ ===== */
+.cards {
+  display: grid;
+  /* столько колонок, сколько влезет, каждая минимум 280px (но не шире экрана) */
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  gap: 32px;
+}
+
+.card {
+  background: #fff;
+  border-radius: var(--radius);
+  overflow: hidden; /* чтобы фото не вылезало за скруглённые углы */
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  transition: opacity 0.8s ease, transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.card.visible:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.14);
+}
+
+.card.hidden {
+  display: none; /* этот класс добавляет скрипт при фильтрации */
+}
+
+.card__img {
+  height: 220px;
+  overflow: hidden;
+}
+
+.card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* фото заполняет блок без искажений */
+  transition: transform 0.6s ease;
+}
+
+/* При наведении на карточку фото плавно приближается */
+.card:hover .card__img img {
+  transform: scale(1.1);
+}
+
+.card__body {
+  padding: 24px;
+}
+
+.card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+}
+
+.card p {
+  color: var(--color-muted);
+  margin-bottom: 14px;
+}
+
+.price {
+  display: inline-block;
+  padding: 4px 14px;
+  background: var(--color-bg-alt);
+  border-radius: 20px;
+  font-weight: 600;
+  color: var(--color-main);
+}
+
+/* ===== О НАС ===== */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.about__img {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.about__img img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+}
+
+.about p {
+  color: var(--color-muted);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.stats strong {
+  display: block;
+  font-family: var(--font-title);
+  font-size: 2.4rem;
+  color: var(--color-main);
+}
+
+.stats span {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+/* ===== ГАЛЕРЕЯ ===== */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 220px;
+  gap: 16px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: opacity 0.8s ease, transform 0.5s ease, filter 0.5s ease;
+}
+
+/* Большое фото занимает 2 колонки и 2 строки */
+.gallery__big {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.gallery img.visible:hover {
+  transform: scale(1.03);
+  filter: brightness(1.1);
+}
+
+/* ===== КОНТАКТЫ И ФОРМА ===== */
+.contacts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.contacts p {
+  color: #cbb9a6;
+}
+
+.phone {
+  display: inline-block;
+  margin-top: 16px;
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.phone:hover {
+  color: var(--color-accent);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form input {
+  padding: 16px 22px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 40px;
+  color: #fff;
+  font-family: var(--font-text);
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form input::placeholder {
+  color: #a8968a;
+}
+
+.form input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+/* Прячем поле-ловушку за пределы экрана */
+.form .trap {
+  position: absolute;
+  left: -9999px;
+}
+
+.form button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.form__message {
+  font-weight: 600;
+  color: var(--color-accent) !important;
+}
+
+/* ===== ПОДВАЛ ===== */
+.footer {
+  background: #140e0a;
+  color: #8f7d6e;
+  text-align: center;
+  padding: 28px 0;
+  font-size: 0.85rem;
+}
+
+.footer a {
+  color: inherit;
+}
+
+/* ===== ЛАЙТБОКС: просмотр фото на весь экран ===== */
+/* Фото, которые можно открыть, показывают курсор-«лупу» */
+.card__img img,
+.gallery img,
+.about__img img {
+  cursor: zoom-in;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 7, 5, 0.94);
+  opacity: 0;
+  visibility: hidden; /* по умолчанию спрятан */
+  transition: opacity 0.35s, visibility 0.35s;
+}
+
+.lightbox.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox__img {
+  max-width: 88vw;
+  max-height: 80vh;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  transform: scale(0.9);
+  transition: transform 0.35s ease;
+}
+
+/* При открытии фото «вырастает» до нормального размера */
+.lightbox.open .lightbox__img {
+  transform: scale(1);
+}
+
+.lightbox__caption {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #e8dccf;
+}
+
+.lightbox__close,
+.lightbox__arrow {
+  position: absolute;
+  z-index: 1; /* кнопки всегда поверх фото */
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+.lightbox__close:hover,
+.lightbox__arrow:hover {
+  background: var(--color-accent);
+}
+
+.lightbox__close {
+  top: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.lightbox__arrow {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.lightbox__arrow--prev { left: 16px; }
+.lightbox__arrow--next { right: 16px; }
+
+/* ===== АДАПТИВНОСТЬ: стили для экранов уже 800px (планшеты и телефоны) ===== */
+@media (max-width: 800px) {
+  .burger {
+    display: flex;
+  }
+
+  /* Меню выезжает справа по нажатию на бургер */
+  .nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 70%;
+    max-width: 300px;
+    background: var(--color-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 32px;
+    transform: translateX(100%); /* спрятано за правым краем */
+    visibility: hidden;
+    transition: transform 0.4s ease, visibility 0.4s;
+  }
+
+  .nav.open {
+    transform: translateX(0); /* класс open добавляет скрипт */
+    visibility: visible;
+  }
+
+  .nav a {
+    margin: 14px 0;
+    font-size: 1.2rem;
+  }
+
+  .burger {
+    position: relative;
+    z-index: 101; /* чтобы крестик был поверх меню */
+  }
+
+  .section {
+    padding: 80px 0;
+  }
+
+  .about,
+  .contacts {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about__img img {
+    height: 300px;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 160px;
+  }
+}
+
+/* Если человек отключил анимации в настройках системы — уважаем это */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal,
+  .hero__content > * {
+    opacity: 1;
+    transform: none;
+  }
+}

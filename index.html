@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <!-- Служебная информация о странице: кодировка, адаптивность, заголовок вкладки -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кофейня «Зерно»</title>
+
+  <!-- Красивые шрифты из Google Fonts: Playfair Display для заголовков, Inter для текста -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Подключаем файл со стилями -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== ШАПКА: логотип и меню навигации ===== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#" class="logo">Зерно<span>.</span></a>
+
+      <!-- Кнопка «бургер» — видна только на телефоне -->
+      <button class="burger" id="burger" aria-label="Открыть меню">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav" id="nav">
+        <a href="#menu">Меню</a>
+        <a href="#about">О нас</a>
+        <a href="#gallery">Галерея</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== ГЛАВНЫЙ ЭКРАН с фоновым фото ===== -->
+  <section class="hero">
+    <div class="hero__overlay"></div>
+    <div class="container hero__content">
+      <p class="hero__subtitle">Кофейня и обжарочная</p>
+      <h1>Кофе, ради которого<br>стоит проснуться</h1>
+      <p class="hero__text">Обжариваем зёрна сами и варим с любовью каждый день с 8:00 до 22:00.</p>
+      <div class="hero__buttons">
+        <a href="#menu" class="button">Смотреть меню</a>
+        <a href="#contacts" class="button button--outline">Забронировать</a>
+      </div>
+    </div>
+    <!-- Стрелка вниз, которая «подпрыгивает» -->
+    <a href="#menu" class="hero__scroll" aria-label="Листать вниз">↓</a>
+  </section>
+
+  <!-- ===== МЕНЮ ===== -->
+  <section class="section" id="menu">
+    <div class="container">
+      <!-- Класс reveal — элемент плавно появится при прокрутке (это делает скрипт) -->
+      <div class="section__head reveal">
+        <p class="section__label">Что мы готовим</p>
+        <h2>Наше меню</h2>
+      </div>
+
+      <!-- Кнопки-фильтры. data-filter говорит скрипту, что показывать -->
+      <div class="filters reveal">
+        <button class="filter active" data-filter="all">Всё</button>
+        <button class="filter" data-filter="coffee">Кофе</button>
+        <button class="filter" data-filter="dessert">Десерты</button>
+      </div>
+
+      <!-- Карточки товаров. data-category — к какой группе относится карточка -->
+      <div class="cards">
+        <article class="card reveal" data-category="coffee">
+          <div class="card__img">
+            <img src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=600&q=80" alt="Эспрессо">
+          </div>
+          <div class="card__body">
+            <h3>Эспрессо</h3>
+            <p>Крепкий и насыщенный, классика.</p>
+            <span class="price">150 ₽</span>
+          </div>
+        </article>
+
+        <article class="card reveal" data-category="coffee">
+          <div class="card__img">
+            <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600&q=80" alt="Капучино">
+          </div>
+          <div class="card__body">
+            <h3>Капучино</h3>
+            <p>Эспрессо с нежной молочной пенкой.</p>
+            <span class="price">220 ₽</span>
+          </div>
+        </article>
+
+        <article class="card reveal" data-category="coffee">
+          <div class="card__img">
+            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=600&q=80" alt="Айс-латте">
+          </div>
+          <div class="card__body">
+            <h3>Айс-латте</h3>
+            <p>Освежающий кофе со льдом и молоком.</p>
+            <span class="price">250 ₽</span>
+          </div>
+        </article>
+
+        <article class="card reveal" data-category="dessert">
+          <div class="card__img">
+            <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=80" alt="Круассан">
+          </div>
+          <div class="card__body">
+            <h3>Круассан</h3>
+            <p>Хрустящий, с маслом, только из печи.</p>
+            <span class="price">180 ₽</span>
+          </div>
+        </article>
+
+        <article class="card reveal" data-category="dessert">
+          <div class="card__img">
+            <img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=600&q=80" alt="Чизкейк">
+          </div>
+          <div class="card__body">
+            <h3>Чизкейк</h3>
+            <p>Нью-Йорк, сливочный и нежный.</p>
+            <span class="price">280 ₽</span>
+          </div>
+        </article>
+
+        <article class="card reveal" data-category="dessert">
+          <div class="card__img">
+            <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=600&q=80" alt="Печенье">
+          </div>
+          <div class="card__body">
+            <h3>Печенье</h3>
+            <p>С кусочками шоколада, домашнее.</p>
+            <span class="price">90 ₽</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== О НАС ===== -->
+  <section class="section section--alt" id="about">
+    <div class="container about">
+      <div class="about__img reveal">
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=900&q=80" alt="Интерьер кофейни">
+      </div>
+      <div class="reveal">
+        <p class="section__label">Наша история</p>
+        <h2>О нас</h2>
+        <p>«Зерно» — маленькая кофейня, где знают постоянных гостей по имени.
+           Мы выбираем зёрна у фермеров, обжариваем их небольшими партиями
+           и следим, чтобы каждая чашка была идеальной.</p>
+        <!-- Блок с цифрами. data-target — до какого числа скрипт будет «досчитывать» -->
+        <div class="stats">
+          <div><strong data-target="5">0</strong><span>лет работаем</span></div>
+          <div><strong data-target="12">0</strong><span>сортов кофе</span></div>
+          <div><strong data-target="3000" data-suffix="+">0</strong><span>довольных гостей</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ГАЛЕРЕЯ ===== -->
+  <section class="section" id="gallery">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="section__label">Атмосфера</p>
+        <h2>Галерея</h2>
+      </div>
+      <div class="gallery">
+        <img class="reveal gallery__big" src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=900&q=80" alt="Кофейня изнутри">
+        <img class="reveal" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80" alt="Латте-арт">
+        <img class="reveal" src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&q=80" alt="Чашка кофе">
+        <img class="reveal" src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&q=80" alt="Кофейные зёрна">
+        <img class="reveal" src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=600&q=80" alt="Приготовление кофе">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== КОНТАКТЫ И ФОРМА ===== -->
+  <section class="section section--dark" id="contacts">
+    <div class="container contacts">
+      <div class="reveal">
+        <p class="section__label">Ждём в гости</p>
+        <h2>Забронировать столик</h2>
+        <p>ул. Кофейная, 7 · ежедневно 8:00–22:00</p>
+        <!-- Ссылка tel: — на телефоне по нажатию сразу откроется звонок -->
+        <a href="tel:+79991234567" class="phone">📞 +7 (999) 123-45-67</a>
+      </div>
+      <form class="form reveal" id="form">
+        <input type="text" id="name" placeholder="Ваше имя" required>
+        <input type="tel" id="phone" placeholder="Телефон" required>
+        <!-- Поле-ловушка для спам-ботов: людям его не видно -->
+        <input type="text" id="website" class="trap" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit" class="button" id="formButton">Отправить</button>
+        <!-- Сюда скрипт выведет сообщение после отправки -->
+        <p class="form__message" id="formMessage"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== ПОДВАЛ ===== -->
+  <footer class="footer">
+    <div class="container">
+      © <span id="year"></span> Кофейня «Зерно» · <a href="tel:+79991234567">+7 (999) 123-45-67</a> · Демо-сайт для портфолио. Фото: Unsplash.
+    </div>
+  </footer>
+
+  <!-- ===== ПРОСМОТР ФОТО НА ВЕСЬ ЭКРАН (лайтбокс) =====
+       Скрыт, пока скрипт не добавит класс open -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Закрыть">×</button>
+    <button class="lightbox__arrow lightbox__arrow--prev" id="lightboxPrev" aria-label="Предыдущее фото">‹</button>
+    <img class="lightbox__img" id="lightboxImg" src="" alt="">
+    <button class="lightbox__arrow lightbox__arrow--next" id="lightboxNext" aria-label="Следующее фото">›</button>
+    <p class="lightbox__caption" id="lightboxCaption"></p>
+  </div>
+
+  <!-- Скрипт подключаем в конце, чтобы страница уже была загружена -->
+  <script src="script.js"></script>
+</body>
+</html>
